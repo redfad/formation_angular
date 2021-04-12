@@ -1,0 +1,24 @@
+<h2>Détails</h2>
+<div *ngIf="personne">
+    <form #monForm=ngForm (ngSubmit)=majPersonne(monForm)>
+      <div class="form-group">
+          <label for="nom">Nom:</label>
+          <input class="form-control" type="text" name="nom" [(ngModel)]="personne.nom" required #nom="ngModel">
+      </div>
+      <div [hidden]="nom.valid || nom.pristine ">
+          Le nom est obligatoire
+      </div>
+      <div class="form-group">
+          <label for="prenom">Prenom:</label>
+          <input class="form-control" type="text" name="prenom" [(ngModel)]="personne.prenom" required #prenom="ngModel">
+      </div>
+      <div [hidden]="prenom.valid || prenom.pristine ">
+          Le prenom est obligatoire
+      </div>
+      <div>
+          <button type="submit" class="btn btn-success"  [disabled]=!monForm.valid>
+              update
+          </button>
+      </div>
+  </form>
+</div>

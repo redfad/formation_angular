@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a href="" class="navbar-brand">Formation Angular</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseNavbar">
+      <span class="navbar-toggler-icon">
+      </span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapseNavbar">
+      <ul class="nav navbar-nav">
+        <li><a class="nav-link item" routerLink="home" routerLinkActive=active [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+        <li><a class="nav-link item" routerLink="template-form" routerLinkActive=active>Template-Form</a></li>
+        <li><a class="nav-link item" routerLink="reactive-form" routerLinkActive=active>Reactive-Form</a></li>
+        <li><a class="nav-link item" routerLink="personne" routerLinkActive=active>Personne</a></li>
+        <li><a class="nav-link item" routerLink="vehicule/voiture" routerLinkActive=active>Voiture</a></li>
+        <li><a class="nav-link item" routerLink="vehicule/camion" routerLinkActive=active>Camion</a></li>
+        <li><a class="nav-link item" routerLink="profile" routerLinkActive=active>Profile</a></li>
+        <li><a class="nav-link item" routerLink="sub" routerLinkActive=active>Subject</a></li>
+        <li><a class="nav-link item" routerLink="obs" routerLinkActive=active>Observable</a></li>
+        <li><a class="nav-link item" routerLink="login" routerLinkActive=active>Login</a></li>
+        <li><a class="nav-link item" routerLink="register" routerLinkActive=active>Sign Up</a></li>
+        <li><a class="nav-link item" (click)="logout()" routerLinkActive=active>Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,103 @@
+<form [formGroup]="personneForm" (ngSubmit)="afficherTout()">
+    <h3>Personne</h3>
+    <div class="form-group">
+        <label for="id">Identifiant</label>
+        <input class="form-control" type="number" placeholder="Enter Id" name=id  formControlName="id">
+    </div>
+    <div *ngIf="personneForm.controls['id'].invalid && (personneForm.controls['id'].dirty || personneForm.controls['id'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="personneForm.controls['id'].errors?.required">
+            L'identifiant est obligatoire
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="nom">Nom:</label>
+        <input class="form-control" type="text" placeholder="Enter LastName" name=nom formControlName="nom">
+    </div>
+    <div *ngIf="personneForm.controls['nom'].invalid && (personneForm.controls['nom'].dirty || personneForm.controls['nom'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="personneForm.controls['nom'].errors?.required">
+            Le nom est obligatoire
+        </div>
+        <div *ngIf="personneForm.controls['nom'].errors?.pattern">
+            Premiere lettre en majuscule et min 3 lettres max 11
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="prenom">Prenom:</label>
+        <input class="form-control" type="text" placeholder="Enter FirstName" name=prenom
+            formControlName="prenom">
+    </div>
+    <div *ngIf="personneForm.controls['prenom'].invalid && (personneForm.controls['prenom'].dirty || personneForm.controls['prenom'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="personneForm.controls['prenom'].errors?.required">
+            Le prenom est obligatoire
+        </div>
+        <div *ngIf="personneForm.controls['prenom'].errors?.pattern">
+            Premiere lettre en majuscule
+        </div>
+    </div>
+    <div formGroupName="adresse">
+        <h3>Adresse</h3>
+        <div class="form-group">
+            Rue : <input class="form-control" type="text" formControlName="rue">
+        </div>
+        <div class="form-group">
+            Ville : <input class="form-control" type="text" formControlName="ville">
+        </div>
+        <div class="form-group">
+            Code postal : <input class="form-control" type="text" formControlName="codePostal">
+        </div>
+    </div>
+    <div formArrayName="sports">
+        <h3>Sports</h3>
+        <button class="btn btn-primary" type="button" (click)="ajouterSport()">
+            Ajouter sport
+        </button>
+        <div *ngFor="let sport of sports.controls; let i = index">
+            <div class="form-group">
+                <label for="sport">Sport:</label>
+                <input type="text" class="form-control" [formControlName]="i">
+                <button class="btn btn-danger" type="button" (click)="supprimerSport(i)">
+                    Supp
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="btn btn-success" [disabled]='!personneForm.valid'>Envoyer</button>
+
+    <div class="form-group">
+        état : {{ personneForm.status }}
+    </div>
+
+    <div >
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Rue</th>
+                    <th scope="col">Sports</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let elt of personnes">
+                <tr>
+                    <td>{{ elt.nom }}</td>
+                    <td>{{ elt.prenom }}</td>
+                    <td>{{ elt.adresse.rue }}</td>
+                    <span *ngFor="let subItem of elt.sports">
+                        <td>{{ subItem }}</td>
+                    </span>                    
+                    <td>
+                        <button type="submit" class="btn btn-danger" (click)="supprimerPersonne(elt)">
+                            supprimer
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

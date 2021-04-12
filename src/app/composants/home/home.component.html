@@ -1,0 +1,62 @@
+<span>{{ title }} app is running!</span>
+
+<ul>
+  <li *ngFor="let elt of tab">
+    {{ elt }}
+  </li>
+</ul>
+
+<ul>
+  <li *ngFor="let elt of tab; let i = index">
+    {{ i }} : {{ elt }}
+  </li>
+</ul>
+
+<ul>
+  <ng-container *ngFor="let elt of tab">
+    <li *ngIf="elt % 2 != 0; else sinon">
+      {{ elt }} est impair
+    </li>
+    <ng-template #sinon>
+      <li>
+        {{ elt }} est pair
+      </li>
+    </ng-template>
+  </ng-container>
+</ul>
+
+<p [textContent]="nom" [ngStyle]="{ backgroundColor: couleur}"></p>
+
+<p [textContent]="nom" [ngStyle]="{ backgroundColor: getBackgroundColor(), color: getColor()}"></p>
+
+<p [ngClass]="{'rouge': true}">{{ nom }}</p>
+
+<p [ngClass]="{'rouge': nom == 'Wick'}">{{ nom }}</p>
+
+<p [ngClass]="nom == 'Wick' ? 'rouge' : 'bleu'">{{ nom }}</p>
+
+<!-- 
+Utiliser ngClass dans un code HTML permettant d’afficher 
+en bleu les
+elements pairs du tableau precedent (tab) et en rouge les elements
+impairs. -->
+
+<ul>
+  <ng-container *ngFor="let elt of tab">
+    <li [ngClass]="elt % 2 == 0 ? 'bleu' : 'rouge'">
+      {{ elt }}
+    </li>
+  </ng-container>
+</ul>
+
+<!-- Ecrire un script Angular qui permet d’afficher dans une liste HTML les
+elements de la liste personne (on affiche que les nom et prenom). Les
+elements d’indice pair seront affiches en rouge, les impairs en bleu. -->
+
+<ul>
+  <ng-container *ngFor="let elt of personnes; let i = index;">
+    <li [ngClass]="i % 2 != 0 ? 'rouge' : 'bleu'">
+      {{ elt.nom + " " + elt.prenom }}
+    </li>
+  </ng-container>
+</ul>
